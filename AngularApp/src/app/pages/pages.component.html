@@ -1,0 +1,36 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#"  routerLinkActive="active" [routerLink]="['./one']">One ...</a>
+      <a mat-list-item href="#"  routerLinkActive="active" [routerLink]="['./two']">Two ...</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="d-flex">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <mat-icon>grid_on</mat-icon>
+      <h1 class="mat-h1 ms-2">Skill Matrix</h1>
+      <span class="space"></span>
+      <button mat-icon-button *ngIf="isDark$ | async as isDark; else isLight" (click)="lightOn(true)">
+        <mat-icon>light_mode</mat-icon>
+      </button>
+      <ng-template #isLight>
+        <button mat-icon-button (click)="lightOn(false)">
+          <mat-icon>nightlight_round</mat-icon>
+        </button>
+      </ng-template>
+      <button mat-icon-button color="accent" [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+    <router-outlet></router-outlet> 
+  </mat-sidenav-content>
+</mat-sidenav-container>

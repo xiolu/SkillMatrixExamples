@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+@import "mat-theme-dark";
+@import "mat-theme-light";
+@import "custom-components-theme";
+@include mat-core();
+@include angular-material-theme($dark-theme);
+$dark: dark;
+$light: light;
+$mat-toolbar-height: 48px; //Custom Property 
+
+.dark-theme {
+  // Dark theme
+  @include custom-components-theme($dark-theme, $dark);
+  // @include angular-material-color($dark-theme);
+    
+}
+.light-theme {
+  @include custom-components-theme($light-theme, $light);
+  @include angular-material-color($light-theme);
+  
+}
